@@ -39,7 +39,6 @@ def welcome(request):
 		trans = []
 		
 		flag = True
-		print "CONSOLE :"
 		for coder in li:
 			#preparing url for a particular friend.Below three lines are just json and api stuff.
 			#I have set count = 15 (code will track last 15 solutions of user).
@@ -63,7 +62,6 @@ def welcome(request):
 							create = "[Accepted!]   " + coder + "- |" + myobj['index'] + "|" + myobj['name'] 
 							if flag == True:
 								trans.append(create)
-								print "[Accepted!]"  , create
  
 					#this will be used for pretests 
 					elif pick['testset']  == "PRETESTS":
@@ -73,7 +71,6 @@ def welcome(request):
 							rem.append(temp)
 							create = "[pretest-passed]   " + coder + "- |" + myobj['index'] + "|" + myobj['name']
 							trans.append(create) 
-							print "[pretest-passed]"  , create
  
 				#this will run when non Accepted solutions.Comment everything 
 				#in below else if you do not wish to see wrong submissions.
@@ -85,8 +82,7 @@ def welcome(request):
 						rem.append(temp)
 						create = "[" + pick['verdict'] + "]   " + coder + "- |" + myobj['index'] + "|" + myobj['name']							
 						if flag == True:
-							trans.append(create)
-							print "[" + pick['verdict'] + "]", create                                                
+							trans.append(create)                                               
 		#we have cached all previous solutions at rem list.from now on it  
 		#will detect only new submitted solutions.Used only at first iteration.
 		flag = True
