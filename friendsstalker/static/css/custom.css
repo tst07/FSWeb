@@ -1,0 +1,16 @@
+/* this is custom CSS stylesheet */
+	
+	body {
+		font-family: 'Open Sans', sans-serif;
+		font-size : 16px;
+	}
+	
+	.myname h1{
+		font-family: 'Vollkorn', serif;
+		color : grey;
+		font-size : 50px;
+	}
+
+	.footer.navbar.navbar-default.navbar-inverse{
+		color : white;
+	}

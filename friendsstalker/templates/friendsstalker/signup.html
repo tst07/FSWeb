@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sign In</title>
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+		<script src="{% static 'js/respond.js' %}"></script>
+	</head>
+	
+	<body>
+			<h2>Sign Up:</h2>
+			<div class="container containerlogin">
+				<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+					<table>
+					{{ form.as_table }}
+					</table>
+					<button type="submit" class="btn btn-danger sm">Register</button>
+				</form>
+				<p><strong>NOTE: </strong> Insert the handles of your friends separated by spaces.</p>
+			</div>
+			<!-- javascript -->
+			<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	</body>
+</html>
+
+
+
+
+

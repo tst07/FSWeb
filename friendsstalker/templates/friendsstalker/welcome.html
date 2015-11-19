@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="refresh" content="10" >
+		<title>Home</title>
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+		<script src="{% static 'js/respond.js' %}"></script>
+	</head>
+	
+	<body>
+			
+			<div class="container">
+			
+			<div class = "row"> 
+			
+			
+				<div class="row myname col-lg-7 col-sm-7">
+						<h2><b> <u>Friends Stalker</u></b></h2>
+					</div>
+					
+					<div class="col-lg-1 col-sm-1">
+					</div>
+				
+				<div class="col-lg-4 col-sm-4"><br>
+					<a href="/signout" class="btn btn-primary sm" role="button">Logout</a>
+					</div>
+				
+				
+			</div><hr>
+			
+			
+				{% for friend in friends %}
+					<p> {{ friend }}	</p>
+				{% endfor %}
+				
+						
+			</div>
+			 <!-- javascript -->
+			<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	</body>
+</html>
+
+
