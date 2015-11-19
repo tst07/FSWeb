@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate ,login,logout
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .forms import LoginForm,SignupForm
+from .forms import LoginForm,SignupForm,ChangeForm
 from django.shortcuts import render,redirect,get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
@@ -36,7 +36,10 @@ def welcome(request):
 		star = request.user.userinfo.text
 		li = star.split()
 		rem = []
-		trans = []
+		ver = []
+		key = []
+		pnam = []
+		
 		
 		flag = True
 		for coder in li:
@@ -59,9 +62,11 @@ def welcome(request):
  
 						if temp not in rem:
 							rem.append(temp)
-							create = "[Accepted!]   " + coder + "- |" + myobj['index'] + "|" + myobj['name'] 
 							if flag == True:
-								trans.append(create)
+								ver.append("Accepted!")
+								key.append(coder)
+								prep  = "|" + myobj['index'] + "|" + myobj['name'] 
+								pnam.append(prep)
  
 					#this will be used for pretests 
 					elif pick['testset']  == "PRETESTS":
@@ -69,8 +74,10 @@ def welcome(request):
 						temp =  pick['id']
 						if temp not in rem:
 							rem.append(temp)
-							create = "[pretest-passed]   " + coder + "- |" + myobj['index'] + "|" + myobj['name']
-							trans.append(create) 
+							ver.append("pretest-passed")
+							key.append(coder)
+							prep  = "|" + myobj['index'] + "|" + myobj['name'] 
+							pnam.append(prep) 
  
 				#this will run when non Accepted solutions.Comment everything 
 				#in below else if you do not wish to see wrong submissions.
@@ -79,18 +86,20 @@ def welcome(request):
 					temp  = str(pick['id']) + pick['verdict']
  
 					if temp not in rem:
-						rem.append(temp)
-						create = "[" + pick['verdict'] + "]   " + coder + "- |" + myobj['index'] + "|" + myobj['name']							
-						if flag == True:
-							trans.append(create)                                               
+						rem.append(temp)						
+						if flag == True: 
+							ver.append(pick['verdict'])
+							key.append(coder)
+							prep  = "|" + myobj['index'] + "|" + myobj['name'] 
+							pnam.append(prep)                                               
 		#we have cached all previous solutions at rem list.from now on it  
 		#will detect only new submitted solutions.Used only at first iteration.
 		flag = True
 		
 		
 		#insert time according to you patience.Unit is seconds.
-
-		return render(request,'friendsstalker/welcome.html',{'friends':trans})
+		fin = zip(ver,key,pnam)
+		return render(request,'friendsstalker/welcome.html',{'friends':fin , 'webuser' : request.user})
 
 
 def logout(request):
@@ -101,6 +110,12 @@ def signup(request):
 	if request.method == "POST":
 		form = SignupForm(request.POST,request.FILES)
 		if form.is_valid():
+			a = request.POST['password']
+			b = request.POST['confirm_password']
+			
+			if a != b:
+				return HttpResponseRedirect('/signup')
+			
 			user=User.objects.create_user(username=request.POST['handle'],password=request.POST['password'])
 									   
 			user.save()
@@ -110,3 +125,15 @@ def signup(request):
 	else:
 		form = SignupForm()
 	return render(request, 'friendsstalker/signup.html', {'form':form})
+
+@login_required
+def change_view(request):
+	if request.method == "POST":
+		form = ChangeForm(request.POST)
+		if form.is_valid():
+			request.user.userinfo.text = request.POST['friends']
+			request.user.userinfo.save()
+			return 	HttpResponseRedirect('/welcome')
+	else:
+		form = ChangeForm()
+	return render(request, 'friendsstalker/change.html', {'form':form})

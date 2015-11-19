@@ -12,9 +12,11 @@
 	<body>
 		<div class = "container">
 		
-		<h3>Welcome to Friends Stalker</h3> <hr />
+		<h3>Friends Stalker</h3> <hr />
 		
-		<h4>Login :</h4>
+		<p>Welcome to the online version of friends Stalker, Login to keep yourself updated with your friends status in codeforces in real-time!</p><br>
+		
+		<h3>Login :</h3><br>
 		<div class="container containerlogin">
 
 			<form method="POST">{% csrf_token %}
@@ -23,7 +25,9 @@
 				</table><br>
 				<button type="submit" class="btn btn-danger sm">Log In</button>
 			</form>
-		
+			
+			<br>
+			<p>New user? Register youself on our database. You are just few clicks away!</p>
 			<a href="/signup">Sign Up</a>
 			
 		</div><br><br>

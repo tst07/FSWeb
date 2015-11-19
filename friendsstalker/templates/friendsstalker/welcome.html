@@ -22,7 +22,8 @@
 						<h2><b> <u>Friends Stalker</u></b></h2>
 					</div>
 					
-					<div class="col-lg-1 col-sm-1">
+					<div class="col-lg-1 col-sm-1"><br>
+							<a href="/change" class="btn btn-primary sm" role="button">Settings</a>
 					</div>
 				
 				<div class="col-lg-4 col-sm-4"><br>
@@ -32,10 +33,51 @@
 				
 			</div><hr>
 			
+			<div class = "row">
+				<h4><p> Hello <strong> {{ webuser }} </strong>, your friends have solved these problems recently :</p></h4>
+			</div> <br><br><br>
 			
-				{% for friend in friends %}
-					<p> {{ friend }}	</p>
-				{% endfor %}
+			
+			<div class="table table-responsive">
+				<table class="table table-striped">
+								<tr>
+									<td class="col-lg-3 col-sm-3 col-xs-3">
+										<strong> VERDICT </strong><br>
+									</td>
+									
+									<td class="col-lg-3 col-sm-3 col-xs-3">
+										<strong> Friend </strong><br>
+									</td>
+									
+									<td class="col-lg-6 col-sm-6 col-xs-6">
+										<strong> Problem </strong> <br>
+									</td>
+								</tr>	
+					
+							{% for i,j,k in friends %}
+								<tr>
+									<td class="col-lg-3 col-sm-3 col-xs-3">
+										{{ i }}<br>
+									</td>
+									
+									<td class="col-lg-3 col-sm-3 col-xs-3">
+										{{ j }}<br>
+									</td>
+									
+									<td class="col-lg-6 col-sm-6 col-xs-6">
+										{{ k }} <br>
+									</td>
+								</tr>	
+									
+							{% endfor %}
+				 </table>
+			</div>					 
+			
+			<footer class="footer navbar navbar-default navbar-inverse">
+				<!-- <p>&nbsp;&nbsp;&nbsp;<small>All rights reserved &copy;</small></p>
+				 <p>&nbsp;&nbsp;&nbsp;<small>Terms and Conditions applied</small></p> -->
+				 <br /><br /><p align="center"><b>Powered by Django</b></p>&nbsp;&nbsp;
+			</footer>
 				
 						
 			</div>
